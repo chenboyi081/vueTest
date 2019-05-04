@@ -12,6 +12,7 @@
 import download from "downloadjs";
 
 export default {
+  name: 'JsonExcel',
   props: {
     // mime type [xls, csv]
     type: {
