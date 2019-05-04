@@ -2,6 +2,7 @@
   <div id="app">
   <router-link v-bind:to="'/'">Home</router-link>
   <router-link v-bind:to="'/about'">About</router-link>
+  <router-link v-bind:to="'/JsonExcel'">JsonExcel</router-link>
   <!--路由管道标签，任何符合某一路由(route)信息的组件都会在这个标签内展示出来 -->
   <router-view></router-view>
   </div>
