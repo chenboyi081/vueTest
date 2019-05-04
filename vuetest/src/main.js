@@ -9,7 +9,7 @@ import VueRouter from 'vue-router'
 import HelloWorld from './components/HelloWorld'
 //导入Aboiut组件
 import About from './components/About'
-import JsonExcel from './components/JsonExcel'
+import JsonExcel1 from './components/JsonExcel1'
 
 //告诉vue使用vue-router路由组件
 Vue.use(VueRouter)
@@ -19,7 +19,7 @@ const routes = [
 { path: '/', component: HelloWorld },
 //对应About组件的路由地址
 { path: '/about', component: About },
-{ path: '/JsonExcel', component: JsonExcel }
+{ path: '/JsonExcel1', component: JsonExcel1 }
 ]
 
 // 创建路由器实例，并且传入`routes`变量作为路由。
