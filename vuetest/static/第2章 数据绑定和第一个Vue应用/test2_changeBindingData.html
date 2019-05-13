@@ -5,25 +5,26 @@
     </head>
 <body>
   <div id="app">
-    {{ message }}<br>
+    <!-- {{ message }}<br>
     <!-- <span>Message: {{ msg }}</span> -->
-    <span v-once>这个将不会改变: {{ msg }}</span>
+    <!-- <span v-once>这个将不会改变: {{ msg }}</span> --> 
+    打开log查看，这个最好看代码学习
   </div>
   <script>
-    var myData = {a = 1}
+    var myData = { a = 1 }
 
-  var app = new Vue({ 
-    el: '#app',
-    data: myData
-  })
+    var app = new Vue({
+      el: '#app',
+      data: myData
+    })
 
-  console.log(app.a);   //1
-  //修改属性原数据会改变
-app.a=2;
-console.log(myData.a);     //2
-//同样修改原数据属性会改变
-myData.a=3;
-console.log(app.a);     //3
+    console.log(app.a);   //1
+    //修改属性原数据会改变
+    app.a = 2;
+    console.log(myData.a);     //2
+    //同样修改原数据属性会改变
+    myData.a = 3;
+    console.log(app.a);     //3
   </script>
   
 </body>
