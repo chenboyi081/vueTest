@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+    </head>
+<body>
+  <div id="app">
+    {{ a }}<br>
+    <!-- <span>Message: {{ msg }}</span> -->
+  </div>
+  <script>
+    //常用的钩子周期有created/mounted/beforeDestroy
+  var app = new Vue({ 
+    el: '#app',
+    data: {a:2},
+    created() {
+        console.log(this.a);
+    },
+    mounted() {
+        console.log(this.$el);
+    },
+  })
+  </script>
+  
+</body>
+</html>
+

@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+        <style>
+            /* 为什么添加如下css参见：https://blog.csdn.net/knqiufan/article/details/81002957 */
+            [v-cloak] {
+                 display: none!important;
+            }
+        </style>
+    </head>
+<body>
+    <pre>
+           5.1 基本指令
+           5.1.1 v-cloak  在vue.js中 v-cloak 这个指令是防止页面加载时出现 vuejs 的变量名而设计的
+           5.1.2 v-once   也是一个不需要表达式的指令，作用是定义它的元素或组件只渲染一次，包括元素或
+           组件的所有子节点。首次渲染后，不再随数据的变化重新渲染，将被视为静态内容.
+           v-once 在业务中也很少使用，当你需要进一步优化性能时，可能会用到。
+    </pre>
+    
+    <div  id="app" v-cloak>
+        {{message}}<br>
+        <span v-once>{{msg}}</span><br>
+        <div v-once>{{msg}}</div>
+    </div>
+
+  <script>
+ 
+  var app = new Vue({ 
+    el: '#app',
+    data:{
+        message:'这是一段文本',
+        msg:'hello,cboii!'
+    },
+    computed: {
+
+    },
+  })
+
+
+  </script>
+  
+</body>
+</html>
+

@@ -10,6 +10,18 @@ import HelloWorld from './components/HelloWorld'
 //导入Aboiut组件
 import About from './components/About'
 import JsonExcel1 from './components/JsonExcel1'
+import JsonExcel2 from './components/JsonExcel2'
+// import BaseLearnLink from './components/BaseLearnLink'
+
+import test1_hello from './components/base/第2章 数据绑定和第一个Vue应用/test1_hello'
+import test2_changeBindingData from './components/base/第2章 数据绑定和第一个Vue应用/test2_changeBindingData'
+import test3钩子周期 from './components/base/第2章 数据绑定和第一个Vue应用/test3钩子周期'
+import test4插值与表达式 from './components/base/第2章 数据绑定和第一个Vue应用/test4插值与表达式'
+import test5插值与表达式之vhtml from './components/base/第2章 数据绑定和第一个Vue应用/test5插值与表达式之vhtml'
+
+
+import JsonExcel from 'vue-json-excel'
+Vue.component('downloadExcel', JsonExcel)
 
 //告诉vue使用vue-router路由组件
 Vue.use(VueRouter)
@@ -19,7 +31,23 @@ const routes = [
 { path: '/', component: HelloWorld },
 //对应About组件的路由地址
 { path: '/about', component: About },
-{ path: '/JsonExcel1', component: JsonExcel1 }
+{ path: '/JsonExcel1', component: JsonExcel1 },
+{ path: '/JsonExcel2', component: JsonExcel2 },
+
+
+{ path: '/test1_hello', component: test1_hello },
+{ path: '/test2_changeBindingData', component: test2_changeBindingData },
+{ path: '/test3钩子周期', component: test3钩子周期 },
+{ path: '/test4插值与表达式', component: test4插值与表达式 },
+{ path: '/test5插值与表达式之vhtml', component: test5插值与表达式之vhtml },
+{ path: '/test1_hello', component: test1_hello },
+{ path: '/test1_hello', component: test1_hello },
+{ path: '/test1_hello', component: test1_hello },
+{ path: '/test1_hello', component: test1_hello },
+{ path: '/test1_hello', component: test1_hello },
+
+// { path: '/BaseLearnLink', component: BaseLearnLink },
+
 ]
 
 // 创建路由器实例，并且传入`routes`变量作为路由。

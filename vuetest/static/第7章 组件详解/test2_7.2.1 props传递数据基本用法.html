@@ -1,0 +1,78 @@
+<html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+            <style>
+
+            </style>
+        </head>
+    <body>
+        <pre>
+                7.2 使用 props 传递数据
+                7.2.1 基本用法
+                在组件中，使用选项 props 来声明需要从父级接收的数据， props 的值可以是两种， 一种是字
+                符串数组，一种是对象 ， 本小节先介绍数组的用法。比如我们构造一个数组，接收一个来自父级的
+                数据 message，并把它在组件模板中渲染
+                props 中声明的数据与组件 data 函数 return 的数据主要区别就是 props 的来自父级，而 data 中
+                的是组件自己的数据，作用域是组件本身，这两种数据都可以在模板 template 及计算属性 computed
+                和方法 methods 中使用。上例的数据 message 就是通过 props 从父级传递过来的，在组件的自定义
+                标签上直接写该 props 的名称，如果要传递多个数据，在 props 数组中添加项即可。
+                由于 HTML 特性不区分大小写，当使用 DOM 模板时，驼峰命名 (camelCase ）的 props 名称
+                要转为短横分隔命名 (kebab-case )
+                有时候，传递的数据并不是直接写死的，而是来自父级的动态数据，这时可以使用指令 v-bind
+  来动态绑定 props 的值，当父组件的数据变化时，也会传递给子组件。
+                7.2.2 单向数据流
+        </pre>
+        
+        <div  id="app">
+        
+           <my-componet message="来自父组件的数据"></my-componet>
+           <my-componet2 warning-text="提示信息"></my-componet2>  
+           
+           <input type="text" v-model="parentMessage"> 
+           <my-componet3 :message2="parentMessage"></my-componet3>
+
+           <my-componet4 message="[1,2,3]"></my-componet4>
+           <my-componet4 :message="[1,2,3]"></my-componet4>
+           
+        </div>
+
+      <script>
+     Vue.component('my-componet',{
+         props:['message'],
+        template:'<div>{{ message }}</div>',
+        data:function(){
+            return {
+                message:'这里是组件的内容'
+            }
+        }
+     });
+     Vue.component('my-componet2',{
+         props:['warningText'],
+        template:'<div>{{ warningText }}</div>'
+     });
+     Vue.component('my-componet3',{
+         props:['message2'],  
+        template:'<div>{{message2}}</div>'
+     });
+     Vue.component('my-componet4',{
+         props:['message'],  
+        template:'<div>{{message.length}}</div>'
+     });
+      var app = new Vue({ 
+        el: '#app',
+        data:{
+          parentMessage:''
+        },
+        methods: {
+
+        },
+      })
+
+
+      </script>
+      
+    </body>
+    </html>
+    
+    

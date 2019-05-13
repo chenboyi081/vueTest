@@ -1,0 +1,78 @@
+<html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+            <style>
+                /* 为什么添加如下css参见：https://blog.csdn.net/knqiufan/article/details/81002957 */
+                [v-cloak] {
+                     display: none!important;
+                }
+            </style>
+        </head>
+    <body>
+        <pre>
+               5.2 条件渲染指令
+               5.2.1 v-if v-else-if v-else 
+               与 JavaScript 的条件语句 if 、 else if 类似， Vue.js 的条件指令可以根据表达式的值在 DOM
+               中渲染或销毁元素／组件
+               v-else-if 要紧跟 v-if, v-else 要紧跟 v-else-if 或 v-if，表达式的值为 真时 ， 当前元素组件及所
+有子节点将被渲染，为假时被移除。如果一次判断的是多个元素，可以在 Vue.js内置的＜template>
+元素上使用条件指令，最终渲染的结果不会包含该元素
+                5.2.2 v-show
+                v-show 的用法与 v-if 基本一致，只不过 v-show 是改变元素的 css 属性 display。当 v-show 表
+达式的值为 false 时， 元素会隐藏，查看 DOM 结构会看到元素上加载了内联样式 display : none;
+                注意：v-show不能在template上使用
+                5.2.3 v-if 与 v-show 的选择
+v-if 和 v-show 具有类似的功能，不过 v-if 才是真正的条件渲染，它会根据表达式适当地销毁
+或重建元素及绑定的事件或子组件。若表达式初始值为 false，则一开始元素／组件并不会渲染，只
+有当条件第一次变为真时才开始编译。
+而 v-show 只是简单的 css 属性切换，无论条件真与否，都会被编译。相比之下， v-if 更适合
+条件不经常改变的场景，因为它切换开销相对较大，而 v-show 适用于频繁切换条件。
+        </pre>
+        
+        <div  id="app">
+            <p v-if="status === 1">当status=1时显示该行</p>
+            <p v-else-if="status === 2">当status=2时显示该行</p>
+            <p v-else>否则显示该行</p>
+
+            <template v-if="status === 1">
+                <p>这是一段文本</p>
+                <p>这是一段文本</p>
+                <p>这是一段文本</p>
+            </template>
+
+            <template v-if="type === 'name'">
+                <label>用户名：</label>
+                <input placeholder="输入用户名">
+            </template>
+            <template v-else>
+                <label>邮箱：</label>
+                <input placeholder="输入邮箱">
+            </template>
+            <button @click="handleToggleClick">切换输入类型</button>
+
+            <p v-show="status === 1">v-show 当status =1 时显示该行</p>
+        </div>
+    
+      <script>
+     
+      var app = new Vue({ 
+        el: '#app',
+        data:{
+           status:1,
+           type:'name'
+        },
+        methods: {
+            handleToggleClick:function(){
+                this.type = this.type === 'name'?'mail':'name';
+            }
+        },
+      })
+    
+    
+      </script>
+      
+    </body>
+    </html>
+    
+    

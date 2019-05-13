@@ -1,0 +1,8 @@
+{
+  "name": "VueTest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/chenboyi081/VueTest.git",
+  "author": "chenboyi081 <chenboyi081@163.com>",
+  "license": "MIT"
+}

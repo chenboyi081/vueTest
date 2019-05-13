@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <pre>
+            简单理解Vue中的nextTick
+            https://www.jianshu.com/p/a7550c0e164f
+            msg1和msg3显示的内容还是变换之前的，而msg2显示的内容是变换之后的。其根本原因是因为Vue中DOM更新是异步的（详细解释在后面）。
+        </pre>
+
+    <div id="app">
+        <div ref="msgDiv">{{msg}}</div>
+        <div v-if="msg1">Message got outside $nextTick: {{msg1}}</div>
+        <div v-if="msg2">Message got inside $nextTick: {{msg2}}</div>
+        <div v-if="msg3">Message got outside $nextTick: {{msg3}}</div>
+        <button @click="changeMsg">
+            Change the Message
+        </button>
+    </div>
+
+    <script>
+
+        var app = new Vue({
+                el: '#app',
+                data: {
+                    msg: 'Hello Vue.',
+                    msg1: '',
+                    msg2: '',
+                    msg3: ''
+                },
+                methods: {
+                    changeMsg() {
+                        this.msg = "Hello world."
+                        this.msg1 = this.$refs.msgDiv.innerHTML
+                        this.$nextTick(() => {
+                            this.msg2 = this.$refs.msgDiv.innerHTML
+                        })
+                        this.msg3 = this.$refs.msgDiv.innerHTML
+                    }
+                },
+            })
+
+
+    </script>
+
+</body>
+
+</html>

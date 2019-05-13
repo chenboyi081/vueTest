@@ -1,0 +1,77 @@
+<html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+            <style>
+
+            </style>
+        </head>
+    <body>
+        <pre>
+                7.1.2 组件用法
+               组件的注册分为全局注册和局部注册
+               table里面用div是不允许的，但是组件中可以用is属性来挂载组件，常见的限制属性还有ul/ol/select
+               除了 template 选项外，组件中还可以像 Vue 实例那样使用其他的选项，比如 data、 computed 、
+methods 等。但是在使用 data 时 ， 和实例稍有区别， data 必须是函数，然后将数据 return 出去
+
+        </pre>
+        
+        <div  id="app">
+        
+           <my-componet></my-componet>
+           <my-componet2></my-componet2>
+           <table>
+               <tbody  is="my-componet">
+               </tbody>
+           </table>
+           <my-counter></my-counter>
+           <my-counter></my-counter>
+           <my-counter></my-counter>
+           
+        </div>
+
+        <div id="app2">
+            <my-componet></my-componet>
+        </div>
+      <script>
+     Vue.component('my-componet',{
+        template:'<div>{{ message }}</div>',
+        data:function(){
+            return {
+                message:'这里是组件的内容'
+            }
+        }
+     });
+     Vue.component('my-counter',{
+        template:'<button @click="counter++">{{ counter }}</button>',
+        data:function(){
+            return {
+               counter:0
+            }
+        }
+     });
+     var Child = {
+         template:'<div>局部注册组件的内容</div>'
+     }
+      var app = new Vue({ 
+        el: '#app',
+        components:{
+            'my-componet2':Child        //注册局部组件
+        },
+        data:{
+        
+        },
+        methods: {
+
+        },
+      })
+      var app = new Vue({ 
+        el: '#app2'
+      })
+
+      </script>
+      
+    </body>
+    </html>
+    
+    

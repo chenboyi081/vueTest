@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+    </head>
+<body>
+    <pre>
+            4.2 绑定 class 的几种方式
+            4.2.1 对象语法
+            类名 active 依赖于数据 isActive，当其为 true 时， div 会拥有类名 Active，为 false
+            时则没有，所以上例最终渲染完的结果是：
+            <div class ＝” active ” ></div>
+            对象中也可以传入多个属性，来动态切换 class。另外，：class 可以与普通 class 共存
+            当： class 的表达式过长或逻辑复杂时，还可以绑定一个计算属性，这是一种很友好和常见的用
+法，一般当条件多于两个时，都可以使用 data 或 computed
+    </pre>
+    F12查看 
+    <div  id="app">
+        <div :class="{'active': isActive}"></div>
+        <div class="static" :class="{'active': isActive,'error':isError}"></div>
+        <div :class="classes"></div>
+    </div>
+
+  <script>
+  
+  var app = new Vue({ 
+    el: '#app',
+    data:{
+        isActive:true,
+        isError:false,
+        error:null
+    },
+    computed: {
+        classes:function(){
+            return{
+                active:this.isActive && !this.error,
+                'text-fail':this.error && this.error.type ==='fail'
+            }
+        }
+    },  
+  })
+
+
+  </script>
+  
+</body>
+</html>
+

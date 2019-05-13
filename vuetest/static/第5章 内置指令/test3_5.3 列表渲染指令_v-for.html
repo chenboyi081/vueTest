@@ -1,0 +1,84 @@
+<html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+            <style>
+                /* 为什么添加如下css参见：https://blog.csdn.net/knqiufan/article/details/81002957 */
+                [v-cloak] {
+                     display: none!important;
+                }
+            </style>
+        </head>
+    <body>
+        <pre>
+               5.3 列表渲染指令 v-for
+               5.3.1 基本用法
+               5.3.2 数组更新
+               5.3.3 过滤与排序
+               
+        </pre>
+        
+        <div  id="app">
+            <ul>
+                <li v-for="(book,index) in books">{{index}}-{{book.name}}</li>
+            </ul>
+---------------------------------------------------------
+            <ul>
+            <template v-for="book in books">
+                <li>书名：{{book.name}}</li>
+                <li>作者：{{book.author}}</li><br>
+            </template>
+            </ul>
+---------------------------------------------------------<br>
+            <span v-for="value in user">{{value}}<br></span>
+---------------------------------------------------------<br>
+<p>数据更新的方法</p>
+<img src="../img/数组更新.png">
+<img src="../img/数组更新2.png">
+        </div>
+    
+      <script>
+     
+      var app = new Vue({ 
+        el: '#app',
+        data:{
+            books:[
+                {name:'三字经',author:'王应麟'},
+                {name:'三十六计',author:'未知'},
+                {name:'格林童话',author:'格林兄弟'}
+            ],
+            user:{                
+                name:'小四',
+                gender:'男',
+                age:27
+            }
+        },
+        methods: {
+
+        },
+      })
+
+      app.books.push({name:'悲惨世界',author:'维克多·雨果'});
+      app.books = app.books.filter(function(item){
+        //   return item.name.match(/三/);
+        return item.name.match();
+      });
+
+    
+      Vue.set(app.books,3,{
+          name:'《css揭秘》',
+          author:'[希]Lea Verou'
+      });
+
+    //该方法同上 
+    //   app.books.splice(3,1,{
+    //     name:'《css揭秘2》',
+    //       author:'[希]Lea Verou'
+    //   });
+
+      </script>
+      
+    </body>
+    </html>
+    
+    

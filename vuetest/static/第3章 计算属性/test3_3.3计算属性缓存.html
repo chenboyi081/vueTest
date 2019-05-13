@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+    </head>
+<body>
+    <pre>
+            3.3 计算属性缓存
+            你可能发现调用 methods 里的方法也可以与计算属性起到同样的作用   
+            没有使用计算属性，在 methods 里定义了一个方法实现了相同的效果，甚至该方法还可以接受
+            参数，使用起来更灵活。既然使用 methods 就可以实现，那么为什么还需要计算属性呢？原因就是
+            计算属性是基于它的依赖缓存的。 一个计算属性所依赖的数据发生变化时，它才会重新取值，所以
+            text 只要不改变，计算属性也就不更新.
+            我们为什么需要缓存？假设我们有一个性能开销比较大的的计算属性 A，它需要遍历一个巨大的数组并做大量的计算。然后我们可能有其他的计算属性依赖于 A 。
+如果没有缓存，我们将不可避免的多次执行 A 的 getter！如果你不希望有缓存，请用方法来替代。
+    </pre>
+    methods 则不同，只要重新渲染，它就会被调用，因此函数也会被执行 。<br>
+    <div  id="app">{{now()}}</div><br>
+
+    计算属性是基于它们的依赖进行缓存的，也就是说当你下次在执行这个操作,是不需要再次执行函数的,因为缓存了嘛！~前提是你没有改 message的值
+：<br>
+    <div  id="app2"> {{now2}} </div><br>
+  <script>
+  
+  var app = new Vue({ 
+    el: '#app',
+    methods: {
+        now:function(){
+            return Date.now();      
+        }
+    },
+  })
+
+var app2 = new Vue({
+    el: '#app2',
+    computed: {
+        now2:function() {
+        return Date.now();
+    }
+    },
+
+})
+
+  </script>
+  
+</body>
+</html>
+
