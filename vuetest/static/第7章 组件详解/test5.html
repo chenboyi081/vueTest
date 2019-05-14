@@ -1,0 +1,65 @@
+<html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+            <style>
+
+            </style>
+        </head>
+    <body>
+        <pre>
+                7.3 组件通信
+                7.3.1 自定义事件
+                当子组件需要向父组件传递数据时，就要用到自定义事件。我们在介绍指令 v-on 时有提到，
+                v-on 除了监昕 DOM 事件外，还可以用于组件之间的自定义事件。
+                如果你了解过 JavaScript 的设计模式一一观察者模式， 一定知道 dispatchEvent 和 addEventListener
+                这两个方法。 Vue 组件也有与之类似的一套模式，子组件用 $emit（）来触发事件，父组件用 $on（）来
+                监听子组件的事件 。
+                父组件也可以直萨在子组件的自定义标签上使用 v-on 来监昕子组件触发的自定义事件
+        </pre>
+        
+        <div  id="app">
+            <p>总数：{{total}}</p>
+           <my-componet @increase="handleGetTotal" @reduce="handleGetTotal"></my-componet>
+
+        </div>
+
+      <script>
+     Vue.component('my-componet',{
+         template:'           \<div>\
+               <button @click="handleIncrease">+1</button>\
+               <button @click="handleReduce">-1</button>\
+           </div>',
+           data:function(){
+               return {counter:0}
+           },
+           methods:{
+               handleIncrease:function(){
+                    this.counter++;
+                    this.$emit('increase',this.counter);
+               },
+               handleReduce:function(){
+                    this.counter--;
+                    this.$emit('reduce',this.counter);                  
+               }
+           }
+     });
+      var app = new Vue({ 
+        el: '#app',
+        data:{
+            total:0
+        },
+        methods: {
+            handleGetTotal:function(total){
+                this.total = total;
+            }
+        },
+      })
+
+
+      </script>
+      
+    </body>
+    </html>
+    
+    
