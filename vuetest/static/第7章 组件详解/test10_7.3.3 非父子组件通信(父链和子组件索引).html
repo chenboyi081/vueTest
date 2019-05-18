@@ -1,0 +1,45 @@
+<html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+            <style>
+
+            </style>
+        </head>
+    <body>
+        <pre>
+                7.3 组件通信
+                7.3.3 非父子组件通信
+                上一节说到使用bus进行通信。
+                除了中央事件总线 bus 外，还有两种方法可以实现组件间通信：父链和子组件索引。
+        </pre>
+
+        <div  id="app">
+            {{message}}
+           <componet-a></componet-a>
+        </div>
+
+      <script>
+          var bus = new Vue();
+
+     Vue.component('componet-a',{
+         template:'<button @click="handleEvent">传递事件</button>',
+         methods:{
+ 
+           }
+     });
+      var app = new Vue({ 
+        el: '#app',
+        data:{
+            message:''
+        },
+
+      })
+
+
+      </script>
+      
+    </body>
+    </html>
+    
+    

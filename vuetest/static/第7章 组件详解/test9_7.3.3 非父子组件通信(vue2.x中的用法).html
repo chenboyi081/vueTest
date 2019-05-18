@@ -1,0 +1,84 @@
+<html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+            <style>
+
+            </style>
+        </head>
+    <body>
+        <pre>
+                7.3 组件通信
+                7.3.3 非父子组件通信
+                上一节说到在 Vue.js l.x 中提供了 $dispatch（）和$broadcast（）进行非父子组件通信，但是这两种用法在组件结构扩展的过程中会变得越来越脆弱，并且不能解决兄弟组件通信的问题。
+                在 Vue. 2.x 中 ， 推荐使用一个空的 Vue 实例作为中央事件总线（ bus ），也就是一个中介 。
+                为了更形象地了解它，我们举一个生活中的例子。
+
+                比如你需要租房子 ， 你可能会找房产中介来登记你的需求 ， 然后中介把你的信息发给满足要
+                求的出租者，出租者再把报价和看房时间告诉中介，由中介再转达给你，整个过程中 ， 买家和卖家
+                并没有任何交流，都是通过中间人来传话的 。
+
+                或者你最近可能要换房了 ， 你会找房产中介登记你的信息 ， 订阅与你找房需求相关的资讯，
+                一旦有符合你的房子出现时，中介会通知你，并传达你房子的具体信息 。
+
+                这两个例子中 ， 你和出租者担任的就是两个跨级的组件，而房产中介就是这个中央事件总线( bus ）
+                 
+                首先创建了一个名为 bus 的空 Vue 实例，里面没有任何内容；然后全局定义了组件
+                component-a；最后创建 Vue 实例 app ，在 app 初始化时，也就是在生命周期 mounted 钩子函数里监
+                听了来自 bus 的事件 on-message，而在组件 component-a 中，点击按钮会通过 bus 把事件 on-message
+                发出去，此时 app 就会接收到来自 bus 的事件，进而在回调里完成自己的业务逻辑。
+
+                这种方法巧妙而轻量地实现了任何组件间的通信，包括父子、兄弟、跨级，而且 Vue 1.x 和
+                Vue 2.x 都适用 。如果深入使用，可以扩展 bus 实例，给它添加 data 、 methods、 computed 等选工页，
+                这些都是可以公用的，在业务中，尤其是协同开发时非常有用，因为经常需要共享一些通用的信息，
+                比如用户登录的昵称、性别、邮箱等，还有用户的授权 token 等。只需在初始化时让 bus 获取一次，
+                任何时间、任何组件就可以从中直接使用了，在单页面富应用（ SPA ）中会很实用，我们会在进阶
+                篇里逐步介绍这些内容。
+
+                当你的项目比较大，有更多的小伙伴参与开发时，也可以选择更好的状态管理解决方案刊眠，
+                在进阶篇里会详细介绍关于它的用法。
+        </pre>
+
+        <div  id="app">
+            {{message}}
+           <componet-a></componet-a>
+        </div>
+
+      <script>
+          var bus = new Vue();
+
+     Vue.component('componet-a',{
+         template:'<button @click="handleEvent">传递事件</button>',
+         methods:{
+            handleEvent:function(){
+                    // this.$dispatch('on-message','来自内部组件的数据');
+                    bus.$emit('on-message','来自组件componet-a的数据');
+               }
+           }
+     });
+      var app = new Vue({ 
+        el: '#app',
+        data:{
+            message:''
+        },
+        mounted:function() {
+            var _this = this;
+            //在实例初始化时，监听来自 bus 实例的事件
+            bus.$on('on-message',function(msg){
+                _this.message = msg;
+            });
+        },
+        // events:{
+        //     'on-message':function(msg){
+        //         this.message = msg;
+        //     }
+        // }
+      })
+
+
+      </script>
+      
+    </body>
+    </html>
+    
+    

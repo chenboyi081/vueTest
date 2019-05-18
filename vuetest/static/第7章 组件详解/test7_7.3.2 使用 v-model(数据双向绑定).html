@@ -1,0 +1,53 @@
+<html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+            <style>
+
+            </style>
+        </head>
+    <body>
+        <pre>
+                7.3 组件通信
+                7.3.2 使用 v-model
+                v-mode l 还可以用来创建自定义的表单输入组件 ， 进行数据双向绑定
+                实现这样一个具有双向绑定的 v-model 组件要满足下面两个要求 ：
+                    . 接收一个 value 属性。
+                    • 在有新的 value 时触发 input 事件。
+        </pre>
+        
+        <div  id="app">
+            <p>总数：{{total}}</p>
+           <my-componet v-model="total"></my-componet>
+            <button @click="handleReduce">-1</button>
+        </div>
+
+      <script>
+     Vue.component('my-componet',{
+         props:['value'],
+         template:'<input :value="value" @input="updateValue">',
+         methods:{
+            updateValue:function(event){
+                    this.$emit('input',event.target.value);
+               }
+           }
+     });
+      var app = new Vue({ 
+        el: '#app',
+        data:{
+            total:0
+        },
+        methods:{
+            handleReduce:function(){
+                this.total--;
+            }
+        }
+      })
+
+
+      </script>
+      
+    </body>
+    </html>
+    
+    

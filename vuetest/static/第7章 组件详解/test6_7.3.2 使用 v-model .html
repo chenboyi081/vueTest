@@ -1,0 +1,50 @@
+<html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+            <style>
+
+            </style>
+        </head>
+    <body>
+        <pre>
+                7.3 组件通信
+                7.3.2 使用 v-model
+                Vue2 .x 可以在自定义组件上使用 v-model 指令,看示例
+        </pre>
+        
+        <div  id="app">
+            <p>总数：{{total}}</p>
+           <my-componet v-model="total"></my-componet>
+
+        </div>
+
+      <script>
+     Vue.component('my-componet',{
+         template:'<button @click="handleClick">+1</button>',
+           data:function(){
+               return {counter:0}
+           },
+           methods:{
+            handleClick:function(){
+                    this.counter++;
+                    this.$emit('input',this.counter);        //通过$emit（）再把counter传递给父组件,不过同上个例子对比，
+                                                            //这次事件名是‘input’，在使用组件的父级，并没有在<my-componet>上使用@input=“handle”，而是直接用了v-model绑定的一个数据total。
+                                                            //这也可以称作是一个语法糖，因为上面的实例可以间接地使用自定义事件来实现
+               }
+           }
+     });
+      var app = new Vue({ 
+        el: '#app',
+        data:{
+            total:0
+        },
+      })
+
+
+      </script>
+      
+    </body>
+    </html>
+    
+    

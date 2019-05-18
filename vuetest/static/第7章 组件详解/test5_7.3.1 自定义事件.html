@@ -15,7 +15,11 @@
                 如果你了解过 JavaScript 的设计模式一一观察者模式， 一定知道 dispatchEvent 和 addEventListener
                 这两个方法。 Vue 组件也有与之类似的一套模式，子组件用 $emit（）来触发事件，父组件用 $on（）来
                 监听子组件的事件 。
-                父组件也可以直萨在子组件的自定义标签上使用 v-on 来监昕子组件触发的自定义事件
+                父组件也可以直接在子组件的自定义标签上使用 v-on 来监听子组件触发的自定义事件
+
+                除了用 v-on 在组件上监听自定义事件外，也可以监听 DOM 事件，这时可以用 .native 修饰符
+                表示监听的是一个原生事件，监听的是该组件的根元素，示例代码如下：
+                <!-- <my-component v-on:click .native=” handleClick” ></my- component> -->
         </pre>
         
         <div  id="app">
@@ -36,7 +40,7 @@
            methods:{
                handleIncrease:function(){
                     this.counter++;
-                    this.$emit('increase',this.counter);
+                    this.$emit('increase',this.counter);        //通过$emit（）再把counter传递给父组件
                },
                handleReduce:function(){
                     this.counter--;
