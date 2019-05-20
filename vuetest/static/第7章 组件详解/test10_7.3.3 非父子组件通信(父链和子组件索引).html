@@ -12,28 +12,69 @@
                 7.3.3 非父子组件通信
                 上一节说到使用bus进行通信。
                 除了中央事件总线 bus 外，还有两种方法可以实现组件间通信：父链和子组件索引。
+
+                尽管 Vue 允许这样操作，但在业务中 ， 子组件应该尽可能地避免依赖父组件的数据，更不应
+                该去主动修改它的数据，因为这样使得父子组件紧藕合，只看父组件，很难理解父组件的状态，因
+                为它可能被任意组件修改 ， 理想情况下，只有组件自己能修改它的状态。父子组件最好还是通过
+                props 和 $emit 来通信。
+
+                子组件索引
+                当子组件较多时 ， 通过 this.$children 来一一遍历出我们需要的一个组件实例是比较困难的，
+                尤其是组件动态渲染时，它们的序列是不固定的。 Vue 提供了子组件索引的方法，用特殊的属性 ref
+                来为子组件指定一个索引名称  
+
+                在父组件模板中，子组件标签上使用 ref 指定一个名称，井在父组件内通过 this.$refs 来访问指
+                定名称的子组件 。
+
+                $refs只在组件渲染完成后才填充，并且它是非响应式的 ． 它仅仅作为一个直接访问子
+                组件的应急方案，应当避免在模板或计算属性中使用$refs。
+
+                
         </pre>
 
         <div  id="app">
             {{message}}
            <componet-a></componet-a>
+
+           <button @click="handleRef">通过ref获取子组件实例</button>
+           <componet-b ref="comB"></componet-b>
+
         </div>
 
       <script>
           var bus = new Vue();
 
      Vue.component('componet-a',{
-         template:'<button @click="handleEvent">传递事件</button>',
+         template:'<button @click="handleEvent">通过父链直接修改数据</button>',
          methods:{
- 
+            handleEvent:function(){
+                this.$parent.message = '来自组件componet-a 的内容';
+            }
            }
      });
+
+     
+     Vue.component('componet-b',{
+         template:'<div>子组件</div>',
+         data:function(){
+             return{
+                 message:'子组件内容'
+             }
+         }
+     });
+
       var app = new Vue({ 
         el: '#app',
         data:{
             message:''
         },
-
+        methods:{
+            handleRef:function(){
+                //通过 $refs 来访问指定的实例
+                var msg = this.$refs.comB.message;
+                console.log(msg);
+            }
+        }
       })
 
 

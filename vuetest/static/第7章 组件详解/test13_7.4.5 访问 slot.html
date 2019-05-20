@@ -1,0 +1,72 @@
+<html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+            <style>
+
+            </style>
+        </head>
+    <body>
+        <pre>
+                7.4 使用slot分发内容
+                7.4.4 访问 slot
+                在 Vue. l.x 中 ， 想要获取某个 slot 是比较麻烦的 ， 需要用 v-el 间接获取。而 Vue扣 2.x 提供
+了用来访问被 slot 分发的内容的方法 $slots 
+
+                通过$slots 可以访问某个具名 slot, this .$slots.default 包括了所有没有被包含在具名 slot 中的节
+                点。尝试编写代码，查看两个 console 打印的内容。
+                $slots 在业务中几乎用不到 ， 在用 render 函数（进阶篇中将介绍）创建组件时会比较有用，但
+                主要还是用于独立组件开发中。
+
+        </pre>
+
+        <div id="app">
+            <child-component>
+                <h2 slot="heander">标题</h2>
+                <p>正文内容</p>
+                <p>更多的正文内容</p>
+                <div slot="footer">底部信息</div>
+            </child-component>
+
+
+        </div>
+       
+
+      <script>
+    Vue.component('child-component',{
+        template:'\<div class="container">\
+                <div class="heander">\
+                    <slot name="heander">aaaaa</slot>\
+                </div>\
+                <div class="main">\
+                    <slot></slot>\
+                </div>\
+                <div class="footer">\
+                    <slot name="footer"></slot>\
+                </div>\
+            </div>',
+            mounted() {
+                var header = this.$slots.header;
+                var main = this.$slots.defalut;
+                var footer = this.$slots.footer;
+                console.log(footer);
+                console.log(footer[0].elm.innerHTML);
+            },
+
+    });
+
+
+      var app = new Vue({ 
+        el: '#app',
+        data:{
+
+        }
+      })
+
+
+      </script>
+      
+    </body>
+    </html>
+    
+    

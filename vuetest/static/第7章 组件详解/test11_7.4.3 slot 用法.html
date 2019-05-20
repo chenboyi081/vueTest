@@ -1,0 +1,82 @@
+<html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+            <style>
+
+            </style>
+        </head>
+    <body>
+        <pre>
+                7.4 使用slot分发内容
+                7.4.1 什么是slot？
+                当需要让组件组合使用，混合父组件的内容与子组件的模板时，就会用到 slot， 这个过程叫作
+                内容分发（ transclusion）。以＜app＞为例，它有两个特点 ：
+                •app组件不知道它的挂载点会有什么内容。挂载点的内容是由＜app＞的父组件决定的 
+                •app组件很可能有它自己的模板。
+                props 传递数据、 events 触发事件和 slot 内 容分发就构成了 Vue 组件的 3 个 API 来源，再复
+                杂的组件也是由这 3 部分构成的。
+                7.4.2 作用域 查看《Vue.js实战》这本书的解释
+                7.4.3 slot 用法
+                单个 Slot
+                在子组件内使用特殊的＜slot>元素就可以为这个子组件开启一个 slot （插槽），在父组件模板
+                里，插入在子组件标签内的所有内容将替代子组件的＜slot> 标签及它的内容
+                具名 Slot
+                给＜slot>元素指定一个 name 后可以分发多个内容，具名 Slot 可以与单个 Slot 共存
+                
+                子组件内声明了 3 个＜slot>元素，其中在＜div class＝”main与内的＜slot> 没有使用 name 特性，
+                它将作为默认 slot 出现，父组件没有使用 slot 特性的元素与内容都将出现在这里。
+
+                如果没有指定默认的匿名 slot，父组件内多余的内容片段都将被抛弃。
+
+                在组合使用组件时，内容分发 API 至关重要。
+        </pre>
+
+        <div id="app">
+            <child-component>
+                    <!-- 去掉下面这些内容，会出现分发的内容 -->
+                    <p>分发的内容</p>
+                    <p>更多分发的内容</p>  
+            </child-component>
+------------------------------------
+            <child-component2>
+                <!-- 去掉下面这些内容，会出现分发的内容 -->
+                    <h2 slot="heander" >标题</h2>
+                    <p>正文内容</p>
+                    <p>更多的正文内容</p>
+                    <div slot="footer">底部信息</div>
+            </child-component2>
+
+        </div>
+
+      <script>
+    Vue.component('child-component',{
+        template:'\<div>\<slot>\<p>如果父组件没有插入内容，我将作为默认出现</p>\</slot>\</div>'
+    });
+
+    Vue.component('child-component2',{
+        template:'\<div class="container">\
+                <div class="heander">\
+                    <slot name="heander">aaaaa</slot>\
+                </div>\
+                <div class="main">\
+                    <slot></slot>\
+                </div>\
+                <div class="footer">\
+                    <slot name="footer"></slot>\
+                </div>\
+            </div>'
+    });
+
+
+      var app = new Vue({ 
+        el: '#app'
+      })
+
+
+      </script>
+      
+    </body>
+    </html>
+    
+    
