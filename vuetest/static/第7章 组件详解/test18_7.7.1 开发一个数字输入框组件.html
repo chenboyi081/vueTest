@@ -1,0 +1,36 @@
+<html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+            <script src="../js/input-number.js"></script> 
+
+            <style>
+
+            </style>
+        </head>
+    <body>
+        <pre>
+                7.7 实战：两个常用组件的开发
+                7.7.1 开发一个数字输入框组件
+
+        </pre>
+
+        <div id="app">
+            <input-number v-model="value" :max="10" :min="0"></input-number>
+        </div>
+       
+
+      <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    value: 5
+                }
+            });
+      </script>
+
+      
+    </body>
+    </html>
+    
+    

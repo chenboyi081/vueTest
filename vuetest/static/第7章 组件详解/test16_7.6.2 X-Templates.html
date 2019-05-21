@@ -1,0 +1,57 @@
+<html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+            <style>
+
+            </style>
+        </head>
+    <body>
+        <pre>
+                7.6 其他
+                7.6.2 X-Templates
+                如果你没有使用 webpack、 gulp 等工具，试想一下你的组件 template 的内容很冗长、复杂，如
+                果都在 JavaScript 里拼接字符串，效率是很低的，因为不能像写 HTML 那样舒服。 Vue 提供了另
+                一种定义模板的方式，在＜script> 标签里使用 text/x-template 类型，井且指定一个 id ， 将这个 id 赋
+                给 template。
+
+                很多刚接触 Vue 开发的新手会非常喜欢这个功能，因为用它，再加上组件知识，就可以很轻
+              松地完成交互相对复杂的页面和应用了。如果再配合一些构建工具（ gulp ）组织好代码结构，开发
+              一些中小型产品是没有问题的。不过， Vue 的初衷并不是滥用它，因为它将模板和组件的其他定义
+              隔离了。在进阶篇里，我们会介绍如何使用 webpack 来编译 .vue 的单文件，从而优雅地解决 HTML
+              书写的问题。
+        </pre>
+
+        <div id="app">
+          <my-component></my-component>
+          <script type="text/x-template" id="my-component">
+            <div>这是组件的内容</div>
+          </script>
+
+
+        </div>
+       
+
+      <script>
+        Vue.component('my-component',{
+          template:'#my-component'
+        });
+
+
+      var app = new Vue({ 
+        el: '#app',
+        data:{
+            
+        },
+        methods: {
+ 
+        },
+      })
+
+
+      </script>
+      
+    </body>
+    </html>
+    
+    
