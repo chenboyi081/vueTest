@@ -29,7 +29,7 @@ Vue.component('input-number',{
             currentValue:this.value
         }
     },
-    wathch:{
+    wathch:{        //watch 监听的数据的回调函数
         currentValue:function(val){
             this.$emit('input',val);
             this.$emit('on-change',val);
